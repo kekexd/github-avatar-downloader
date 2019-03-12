@@ -3,7 +3,7 @@ var token = require('./secret');
 var fs = require('fs');
 var input = process.argv.slice(2);
 if(!input[0]){
-  console.log('Please specify the OWNER and the NAME of the repository!')
+  console.log('Please specify the Owner and the Name of the repository!')
   return;
 }
 
@@ -32,10 +32,10 @@ getRepoContributors(input[0], input[1], function(err, result) {
     console.log("Errors:", err);
   };
   result.forEach(function(result) {
-      var avatarURL = result.avatar_url;
-      var userName = result.login;
-      downloadImageByURL(avatarURL, 'avatars/' + userName + '.jpg')
-    });
+    var avatarURL = result.avatar_url;
+    var userName = result.login;
+    downloadImageByURL(avatarURL, 'avatars/' + userName + '.jpg')
+  });
 });
 
 function downloadImageByURL(url, filePath) {
@@ -44,16 +44,10 @@ function downloadImageByURL(url, filePath) {
        .on('error', function (err) {
          throw err;
        })
-       // .on('response', function (response) {
-       //  console.log('Downloading image...')})
        .pipe(fs.createWriteStream(filePath))
-       // .on('finish', function(){
-       //  console.log('Download complete.')})
   });
 
 };
-
-//downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg")
 
 
 
