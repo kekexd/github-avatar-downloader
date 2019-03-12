@@ -2,6 +2,10 @@ var request = require('request');
 var token = require('./secret');
 var fs = require('fs');
 var input = process.argv.slice(2);
+if(!input[0]){
+  console.log('Please specify the OWNER and the NAME of the repository!')
+  return;
+}
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -21,6 +25,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     cb(err, contributors);
   });
 }
+
 
 getRepoContributors(input[0], input[1], function(err, result) {
   if(err){
